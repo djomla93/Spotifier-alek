@@ -1,0 +1,32 @@
+PODS:
+  - Marshal (1.2.4)
+  - RTCoreDataStack (3.0)
+  - SwiftyOAuth (1.1)
+
+DEPENDENCIES:
+  - Marshal (~> 1.2)
+  - RTCoreDataStack (from `https://github.com/radianttap/RTSwiftCoreDataStack.git`)
+  - SwiftyOAuth (from `https://github.com/radianttap/SwiftyOAuth.git`)
+
+EXTERNAL SOURCES:
+  RTCoreDataStack:
+    :git: https://github.com/radianttap/RTSwiftCoreDataStack.git
+  SwiftyOAuth:
+    :git: https://github.com/radianttap/SwiftyOAuth.git
+
+CHECKOUT OPTIONS:
+  RTCoreDataStack:
+    :commit: 8e0613894a0d53849be370c917121ee1628d77f0
+    :git: https://github.com/radianttap/RTSwiftCoreDataStack.git
+  SwiftyOAuth:
+    :commit: 42a265433baa08647ad2dcf3da1c31e3c6515874
+    :git: https://github.com/radianttap/SwiftyOAuth.git
+
+SPEC CHECKSUMS:
+  Marshal: 8e04e6624e506921db7143b0bfd83caee03f32d6
+  RTCoreDataStack: 3b63b084ce73ac993031e17c0da9e0285c52a535
+  SwiftyOAuth: 1389a21dafa97335a52e68a67269097e148001bc
+
+PODFILE CHECKSUM: cbef7ed8efa1aa50fa5ef3b7740a3d67fc50aab8
+
+COCOAPODS: 1.2.1

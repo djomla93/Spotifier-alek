@@ -1,0 +1,90 @@
+//
+// HTTP.swift
+//
+// Copyright (c) 2016 Damien (http://delba.io)
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in all
+// copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+//
+
+typealias JSON = [String: Any]
+
+class URLSessionDelegateHandler : NSObject, URLSessionDelegate {
+
+	func urlSession(_ session: URLSession, didReceive challenge: URLAuthenticationChallenge, completionHandler: @escaping (URLSession.AuthChallengeDisposition, URLCredential?) -> Void) {
+
+		if challenge.protectionSpace.authenticationMethod == NSURLAuthenticationMethodServerTrust {
+			let trust = challenge.protectionSpace.serverTrust!
+			let host = challenge.protectionSpace.host
+			guard session.serverTrustPolicy.evaluate(trust, forHost: host) else {
+				completionHandler(URLSession.AuthChallengeDisposition.rejectProtectionSpace, nil)
+				return
+			}
+
+			let credential = URLCredential(trust: trust)
+			challenge.sender?.use(credential, for: challenge)
+			completionHandler(URLSession.AuthChallengeDisposition.useCredential, credential)
+		}
+
+		completionHandler(URLSession.AuthChallengeDisposition.performDefaultHandling, nil)
+	}
+}
+
+public struct HTTPConfig {
+	public static var serverTrustPolicy = ServerTrustPolicy.performDefaultEvaluation(validateHost: true)
+}
+
+extension URLSession {
+
+	var serverTrustPolicy : ServerTrustPolicy {
+		return HTTPConfig.serverTrustPolicy
+	}
+}
+
+struct HTTP {
+    static func POST(_ URL: Foundation.URL, parameters: [String: String], completion: @escaping (Result<JSON>) -> Void) {
+        var request = URLRequest(url: URL)
+        request.setValue("application/json", forHTTPHeaderField: "Accept")
+        request.httpMethod = "POST"
+        request.httpBody = parameters.map { "\($0)=\($1)" }
+            .joined(separator: "&")
+            .data(using: String.Encoding.utf8)
+
+        let session = URLSession(configuration: URLSessionConfiguration.default,
+                                 delegate: URLSessionDelegateHandler(),
+                                 delegateQueue: nil)
+        
+        let task = session.dataTask(with: request) { data, response, error in
+            if let error = error {
+                completion(.failure(error as NSError))
+                return
+            }
+            
+            let data = data ?? Data()
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as? JSON ?? [:]
+                completion(.success(json))
+            } catch {
+                completion(.failure(error))
+            }
+        }
+        
+        task.resume()
+    }
+}

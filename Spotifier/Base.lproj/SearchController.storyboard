@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYM-lm-rfK">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--SEARCH-->
+        <scene sceneID="ogt-iD-WGp">
+            <objects>
+                <viewController storyboardIdentifier="SearchController" id="BYM-lm-rfK" customClass="SearchController" customModule="Spotifier" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kAM-uG-1OV"/>
+                        <viewControllerLayoutGuide type="bottom" id="L4P-BW-0du"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JdE-8v-Qm0">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sbg-7v-l5j">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="0.0" id="lpF-BN-ihH">
+                                    <size key="itemSize" width="300" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="BYM-lm-rfK" id="AwR-wS-YsW"/>
+                                    <outlet property="delegate" destination="BYM-lm-rfK" id="jZh-bh-AqN"/>
+                                </connections>
+                            </collectionView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1gK-Hb-exl">
+                                <rect key="frame" x="0.0" y="64" width="375" height="68"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="pxC-46-2Uy">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="68"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search for..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="OQ6-9W-Lfy">
+                                            <rect key="frame" x="16" y="16" width="343" height="36"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="36" id="NDT-d0-xDa"/>
+                                            </constraints>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                            <connections>
+                                                <action selector="didChangeTextField:" destination="BYM-lm-rfK" eventType="editingChanged" id="6ov-Da-irZ"/>
+                                            </connections>
+                                        </textField>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="OQ6-9W-Lfy" secondAttribute="bottom" constant="8" id="JHO-Zx-PhO"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="OQ6-9W-Lfy" secondAttribute="trailing" constant="8" id="UI6-ie-OQx"/>
+                                        <constraint firstItem="OQ6-9W-Lfy" firstAttribute="top" secondItem="pxC-46-2Uy" secondAttribute="topMargin" constant="8" id="gPC-7O-jkQ"/>
+                                        <constraint firstItem="OQ6-9W-Lfy" firstAttribute="leading" secondItem="pxC-46-2Uy" secondAttribute="leadingMargin" constant="8" id="xQb-RA-LXZ"/>
+                                    </constraints>
+                                </view>
+                                <blurEffect style="extraLight"/>
+                            </visualEffectView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.47195971009999999" green="0.59873712059999995" blue="0.70604139570000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="1gK-Hb-exl" secondAttribute="trailing" id="7IK-1x-44S"/>
+                            <constraint firstAttribute="trailing" secondItem="sbg-7v-l5j" secondAttribute="trailing" id="XMK-8u-eMt"/>
+                            <constraint firstItem="sbg-7v-l5j" firstAttribute="top" secondItem="JdE-8v-Qm0" secondAttribute="top" id="dJG-J5-spY"/>
+                            <constraint firstItem="1gK-Hb-exl" firstAttribute="top" secondItem="kAM-uG-1OV" secondAttribute="bottom" id="dfa-pQ-eTi"/>
+                            <constraint firstItem="1gK-Hb-exl" firstAttribute="leading" secondItem="JdE-8v-Qm0" secondAttribute="leading" id="u6q-sQ-tH3"/>
+                            <constraint firstItem="L4P-BW-0du" firstAttribute="top" secondItem="sbg-7v-l5j" secondAttribute="bottom" id="wJ2-KF-m9y"/>
+                            <constraint firstItem="sbg-7v-l5j" firstAttribute="leading" secondItem="JdE-8v-Qm0" secondAttribute="leading" id="xjg-5l-NXh"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="SEARCH" id="pKv-ke-QYs"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="collectionView" destination="sbg-7v-l5j" id="qmu-Gq-Mj3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lKo-Ko-cz2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="109.59999999999999" y="26.53673163418291"/>
+        </scene>
+    </scenes>
+</document>

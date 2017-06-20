@@ -1,0 +1,27 @@
+{
+  "name": "RTCoreDataStack",
+  "version": "3.0",
+  "summary": "A Core Data library with lots of options to initialize the whole stack. Especially useful and usable for heavy background processing, since - by default - it uses setup with two PSCs, one for reading in the main thread and one for writing in background thread.",
+  "homepage": "https://github.com/radianttap/RTSwiftCoreDataStack",
+  "license": {
+    "type": "MIT",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Aleksandar Vacić": "radianttap.com"
+  },
+  "social_media_url": "https://twitter.com/radiantav",
+  "platforms": {
+    "ios": "8.4",
+    "watchos": "2.0",
+    "tvos": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/radianttap/RTSwiftCoreDataStack.git"
+  },
+  "source_files": "RTCoreDataStack/*.{swift}",
+  "frameworks": [
+    "Foundation",
+    "CoreData"
+  ]
+}
